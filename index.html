@@ -702,7 +702,7 @@
       <div class="tap-hint">или нажми на шар</div>
 
       <p class="note">
-        Если тебя не устроил ответ, не торопись искать новый. Вернись через час
+        Если тебя не устроил ответ, не торопись искать новый. Вернись через 15 минут
       </p>
 
       <div class="status" id="status"></div>
@@ -742,7 +742,7 @@
       ];
 
       const LOCK_MS = 15 * 60 * 1000;
-      const STORAGE_KEY = "anna_magic_ball_v11";
+      const STORAGE_KEY = "anna_magic_ball_v12";
       const ballWrap = document.getElementById("ballWrap");
       const askBtn = document.getElementById("askBtn");
       const answerEl = document.getElementById("answer");
@@ -888,7 +888,7 @@
         renderAnswer(state.answer);
         askBtn.hidden = false;
         askBtn.disabled = true;
-        askBtn.textContent = "ВЕРНИСЬ ЧЕРЕЗ ЧАС";
+        askBtn.textContent = "ВЕРНИСЬ ЧЕРЕЗ 15 МИНУТ";
         statusEl.textContent = `Следующий вопрос — через ${formatRemaining(remaining)}`;
 
         if (!timer) {
