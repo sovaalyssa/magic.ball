@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#07070d" />
+  <title>Личный магический шар Анечки Аббасовой</title>
+  <style>
+    :root{
+      --bg:#06060b;
+      --bg2:#0b0b13;
+      --text:#f4f2ef;
+      --muted:#9d99a6;
+      --muted2:#7f7b89;
+      --gold:#dac8a6;
+      --violet:#8e73ff;
+      --violet2:#5d47d8;
+      --violet3:#ad8fff;
+      --blue1:#0b1237;
+      --blue2:#172987;
+      --blue3:#3253ea;
+    }
+
+    *{box-sizing:border-box}
+
+    html, body{
+      margin:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overscroll-behavior:none;
+    }
+
+    body{
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(159,130,255,.13), transparent 22%),
+        radial-gradient(circle at 50% 38%, rgba(104,74,215,.16), transparent 24%),
+        radial-gradient(circle at 50% 85%, rgba(91,63,194,.10), transparent 28%),
+        linear-gradient(180deg, #090910 0%, #06060b 100%);
+    }
+
+    .bg{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+    }
+
+    .bg::before{
+      content:"";
+      position:absolute;
+      inset:-10%;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,.95) 0 1px, transparent 2px),
+        radial-gradient(circle at 25% 11%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 79% 14%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 90% 26%, rgba(255,255,255,.65) 0 1px, transparent 2px),
+        radial-gradient(circle at 18% 38%, rgba(255,255,255,.65) 0 1px, transparent 2px),
+        radial-gradient(circle at 82% 40%, rgba(255,255,255,.75) 0 1px, transparent 2px),
+        radial-gradient(circle at 11% 62%, rgba(255,255,255,.5) 0 1px, transparent 2px),
+        radial-gradient(circle at 74% 66%, rgba(255,255,255,.75) 0 1px, transparent 2px),
+        radial-gradient(circle at 91% 73%, rgba(255,255,255,.55) 0 1px, transparent 2px),
+        radial-gradient(circle at 28% 79%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 47% 57%, rgba(255,255,255,.55) 0 1px, transparent 2px),
+        radial-gradient(circle at 58% 23%, rgba(255,255,255,.55) 0 1px, transparent 2px);
+      opacity:.7;
+      animation:twinkle 9s linear infinite alternate;
+    }
+
+    .nebula{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(125,92,255,.16), transparent 23%),
+        radial-gradient(circle at 35% 50%, rgba(87,67,194,.12), transparent 18%),
+        radial-gradient(circle at 65% 54%, rgba(157,117,255,.11), transparent 18%),
+        radial-gradient(circle at 50% 72%, rgba(91,64,182,.09), transparent 18%);
+      filter:blur(20px);
+      animation:floatNebula 14s ease-in-out infinite alternate;
+    }
+
+    .sparkles{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .spark{
+      position:absolute;
+      width:12px;
+      height:12px;
+      opacity:.7;
+      filter:drop-shadow(0 0 7px rgba(226,214,255,.4));
+      animation:blink 3.8s ease-in-out infinite;
+    }
+
+    .spark::before, .spark::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      background:linear-gradient(180deg, transparent, rgba(255,255,255,.95), transparent);
+      transform:translate(-50%,-50%);
+      border-radius:999px;
+    }
+
+    .spark::before{ width:1px; height:100%; }
+    .spark::after{ width:100%; height:1px; }
+
+    .spark.s1{ left:16%; top:14%; animation-delay:.1s; transform:scale(.9);}
+    .spark.s2{ right:18%; top:18%; animation-delay:1s; transform:scale(1.05);}
+    .spark.s3{ left:26%; top:54%; animation-delay:2.1s; transform:scale(.75);}
+    .spark.s4{ right:20%; top:60%; animation-delay:1.7s; transform:scale(.9);}
+    .spark.s5{ left:50%; top:10%; animation-delay:2.9s; transform:scale(.7);}
+
+    .app{
+      position:relative;
+      width:min(100%, 470px);
+      height:100dvh;
+      margin:0 auto;
+      padding:30px 18px calc(20px + env(safe-area-inset-bottom));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      overflow:hidden;
+    }
+
+    .title{
+      margin:2px 0 0;
+      text-align:center;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height:.94;
+      letter-spacing:-.04em;
+      color:#f7f4ef;
+      text-shadow:0 0 24px rgba(255,255,255,.03);
+      flex:0 0 auto;
+    }
+    .title .l1{ display:block; font-size:clamp(31px, 8vw, 46px); margin-bottom:4px; }
+    .title .l2{
+      display:block;
+      font-size:clamp(49px, 12vw, 72px);
+      position:relative;
+    }
+    .title .l2::after{
+      content:"✦";
+      position:absolute;
+      right:-9px;
+      top:-4px;
+      font-size:.24em;
+      color:#efe5ff;
+      text-shadow:0 0 12px rgba(232,214,255,.8);
+    }
+    .title .l3{
+      display:block;
+      margin-top:10px;
+      font-size:clamp(27px, 7vw, 38px);
+      letter-spacing:-.03em;
+    }
+
+    .ornament{
+      width:122px;
+      height:18px;
+      margin:24px auto 12px;
+      position:relative;
+      opacity:.88;
+      flex:0 0 auto;
+    }
+    .ornament::before, .ornament::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      width:46px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--gold));
+    }
+    .ornament::before{ left:0; }
+    .ornament::after{ right:0; transform:scaleX(-1); }
+    .ornament span{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:10px;
+      height:10px;
+      transform:translate(-50%,-50%) rotate(45deg);
+      border:1px solid var(--gold);
+      box-shadow:0 0 10px rgba(218,200,166,.35);
+    }
+
+    .center{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin-top:4px;
+      flex:1 1 auto;
+      min-height:0;
+      justify-content:flex-start;
+    }
+
+    .ball-wrap{
+      position:relative;
+      width:min(82vw, 362px);
+      aspect-ratio:1;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      margin:0 auto 22px;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .ball-glow{
+      position:absolute;
+      inset:-14%;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(135,104,255,.23) 0%, rgba(82,59,175,.15) 35%, rgba(49,36,95,.06) 54%, transparent 72%);
+      filter:blur(18px);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .ball-glow::after{
+      content:"";
+      position:absolute;
+      inset:11%;
+      border-radius:50%;
+      border:1px solid rgba(165,137,255,.12);
+      box-shadow:
+        0 0 28px rgba(135,104,255,.10),
+        0 0 72px rgba(108,81,218,.08);
+    }
+
+    .ball-shadow{
+      position:absolute;
+      left:50%;
+      bottom:-2%;
+      transform:translateX(-50%);
+      width:74%;
+      height:12%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(140,107,255,.34), rgba(0,0,0,.08) 58%, transparent 80%);
+      filter:blur(16px);
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .motion{
+      position:absolute;
+      inset:-6%;
+      opacity:.45;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .motion::before, .motion::after{
+      content:"";
+      position:absolute;
+      top:23%;
+      width:30%;
+      height:56%;
+      border-radius:50%;
+      border:4px solid rgba(165,137,255,.13);
+      border-left-color:transparent;
+      border-top-color:transparent;
+      filter:blur(.2px);
+    }
+    .motion::before{
+      left:0%;
+      transform:rotate(12deg);
+      box-shadow:
+        -10px 18px 0 -8px rgba(128,96,255,.1),
+        -18px 28px 0 -14px rgba(128,96,255,.07);
+    }
+    .motion::after{
+      right:0%;
+      transform:scaleX(-1) rotate(12deg);
+      box-shadow:
+        -10px 18px 0 -8px rgba(128,96,255,.12),
+        -18px 28px 0 -14px rgba(128,96,255,.08);
+    }
+
+    .ball{
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      overflow:hidden;
+      z-index:1;
+      background:
+        radial-gradient(circle at 25% 18%, rgba(255,255,255,.18), transparent 17%),
+        radial-gradient(circle at 29% 21%, rgba(255,255,255,.09), transparent 24%),
+        radial-gradient(circle at 74% 22%, rgba(255,255,255,.11), transparent 12%),
+        radial-gradient(circle at 70% 74%, rgba(124,93,230,.17), transparent 21%),
+        radial-gradient(circle at 46% 44%, #17171d 0%, #0d0d13 50%, #040408 77%, #000 100%);
+      box-shadow:
+        inset -28px -34px 58px rgba(0,0,0,.88),
+        inset 16px 14px 26px rgba(255,255,255,.032),
+        inset 0 0 0 1px rgba(255,255,255,.08),
+        0 28px 44px rgba(0,0,0,.72),
+        0 0 34px rgba(129,98,255,.12),
+        -6px -4px 18px rgba(255,255,255,.04);
+    }
+
+    .ball::before{
+      content:"";
+      position:absolute;
+      left:8%;
+      top:8%;
+      width:48%;
+      height:18%;
+      border-radius:50%;
+      background:linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.03));
+      transform:rotate(-17deg);
+      filter:blur(2px);
+      opacity:.55;
+    }
+
+    .ball::after{
+      content:"";
+      position:absolute;
+      right:5%;
+      top:18%;
+      width:20%;
+      height:44%;
+      border-radius:50%;
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(145,110,255,.05));
+      transform:rotate(10deg);
+      filter:blur(5px);
+      opacity:.55;
+    }
+
+    .rim{
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      box-shadow:
+        inset -10px 0 18px rgba(161,128,255,.18),
+        inset 3px -2px 10px rgba(255,255,255,.03),
+        0 0 0 1px rgba(255,255,255,.09),
+        0 0 20px rgba(135,103,255,.10);
+      pointer-events:none;
+      z-index:2;
+    }
+
+    .window{
+      position:absolute;
+      left:50%;
+      top:49%;
+      transform:translate(-50%,-45%);
+      width:57%;
+      aspect-ratio:1.08;
+      z-index:3;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.68));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .window-frame{
+      position:absolute;
+      inset:0;
+      clip-path:polygon(8% 10%, 92% 10%, 50% 92%);
+      background:linear-gradient(180deg, #212129 0%, #05050a 58%, #15151c 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        inset 0 -2px 10px rgba(0,0,0,.6);
+    }
+
+    .window-frame::after{
+      content:"";
+      position:absolute;
+      inset:8px;
+      clip-path:polygon(8% 10%, 92% 10%, 50% 92%);
+      background:
+        radial-gradient(circle at 50% 38%, rgba(121,139,255,.22), transparent 36%),
+        linear-gradient(180deg, #090b20 0%, #152484 58%, #2f4de3 100%);
+      box-shadow:
+        inset 0 0 24px rgba(103,129,255,.36),
+        0 0 14px rgba(56,88,255,.18);
+    }
+
+    .answer{
+      position:relative;
+      z-index:4;
+      width:66%;
+      min-height:44%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 2px 8px;
+      color:rgba(255,255,255,.97);
+      font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+      font-weight:300;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      text-shadow:
+        0 0 8px rgba(255,255,255,.12),
+        0 0 14px rgba(87,113,255,.08);
+      opacity:1;
+      transform:translateY(-10px);
+      transition:opacity .2s ease, transform .2s ease;
+    }
+
+    .answer.hidden{
+      opacity:0;
+      transform:translateY(-10px) scale(.94);
+    }
+
+    .answer span{
+      display:inline-block;
+      max-width:100%;
+      white-space:normal;
+      overflow-wrap:normal;
+      word-break:normal;
+      hyphens:none;
+    }
+
+    .answer.single span{
+      white-space:nowrap;
+    }
+
+    .ask-btn{
+      appearance:none;
+      -webkit-appearance:none;
+      border:none;
+      outline:none;
+      width:min(100%, 392px);
+      min-height:70px;
+      border-radius:22px;
+      position:relative;
+      overflow:hidden;
+      padding:0 20px 0 25px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+      color:#fff;
+      font-size:18px;
+      letter-spacing:.23em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.03),
+        0 0 0 1px rgba(220,205,175,.8),
+        0 0 18px rgba(125,97,255,.15);
+      transition:transform .12s ease, opacity .12s ease;
+      flex:0 0 auto;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+      user-select:none;
+    }
+
+    .ask-btn::before{
+      content:"";
+      position:absolute;
+      left:18%;
+      right:18%;
+      top:-26%;
+      height:48%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(151,120,255,.55), rgba(151,120,255,.03) 62%, transparent 72%);
+      filter:blur(7px);
+      pointer-events:none;
+    }
+
+    .ask-btn:active{ transform:scale(.985); }
+    .ask-btn[hidden]{ display:none !important; }
+    .ask-btn[disabled]{ opacity:.55; cursor:default; }
+
+    .note{
+      width:min(100%, 392px);
+      margin:20px 0 0;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      letter-spacing:.004em;
+      flex:0 0 auto;
+    }
+
+    .status{
+      min-height:18px;
+      margin-top:10px;
+      color:var(--muted2);
+      font-size:12px;
+      text-align:center;
+      line-height:1.4;
+      flex:0 0 auto;
+    }
+
+    .tap-hint{
+      margin-top:8px;
+      font-size:11px;
+      color:#757182;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      opacity:.9;
+    }
+
+    .ball-wrap.shake .ball{
+      animation:ballShake .98s cubic-bezier(.36,.07,.19,.97) both;
+      transform-origin:50% 54%;
+    }
+
+    .ball-wrap.shake .motion{
+      animation:motionPulse .98s ease-out both;
+    }
+
+    .ball-wrap.shake .ball-glow{
+      animation:glowPulse .98s ease-out both;
+    }
+
+    @keyframes ballShake{
+      0%   {transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+      10%  {transform:translate3d(-12px,1px,0) rotate(-2.6deg)}
+      20%  {transform:translate3d(11px,-2px,0) rotate(2.2deg)}
+      30%  {transform:translate3d(-9px,2px,0) rotate(-1.8deg)}
+      40%  {transform:translate3d(8px,-1px,0) rotate(1.5deg)}
+      50%  {transform:translate3d(-7px,1px,0) rotate(-1.2deg)}
+      60%  {transform:translate3d(6px,-1px,0) rotate(1deg)}
+      70%  {transform:translate3d(-4px,1px,0) rotate(-.7deg)}
+      80%  {transform:translate3d(3px,0,0) rotate(.45deg)}
+      90%  {transform:translate3d(-1px,0,0) rotate(-.2deg)}
+      100% {transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+    }
+
+    @keyframes motionPulse{
+      0%{opacity:.25; transform:scale(.98)}
+      20%{opacity:1; transform:scale(1.04)}
+      60%{opacity:.88; transform:scale(1.02)}
+      100%{opacity:.45; transform:scale(1)}
+    }
+
+    @keyframes glowPulse{
+      0%{transform:scale(.98); opacity:.8}
+      28%{transform:scale(1.03); opacity:1}
+      100%{transform:scale(1); opacity:1}
+    }
+
+    @keyframes twinkle{
+      from{opacity:.5; transform:translateY(0)}
+      to{opacity:.8; transform:translateY(-6px)}
+    }
+
+    @keyframes floatNebula{
+      from{transform:translateY(0) scale(1)}
+      to{transform:translateY(-8px) scale(1.03)}
+    }
+
+    @keyframes blink{
+      0%,100%{opacity:.25; transform:scale(.7)}
+      50%{opacity:1; transform:scale(1)}
+    }
+
+    @media (max-width:390px){
+      .app{padding-left:14px;padding-right:14px}
+      .title .l2{font-size:46px}
+      .title .l3{font-size:25px}
+      .ball-wrap{width:min(84vw, 330px)}
+      .ask-btn{font-size:17px; letter-spacing:.2em}
+      .answer{font-size:16px}
+    }
+
+    @media (max-height:760px){
+      .app{padding-top:18px; padding-bottom:14px}
+      .ornament{margin:16px auto 8px}
+      .ball-wrap{width:min(68vw, 292px); margin-bottom:16px}
+      .ask-btn{min-height:62px}
+      .note{margin-top:16px; font-size:13px}
+      .answer{font-size:15px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .ball-wrap.shake .ball,
+      .ball-wrap.shake .motion,
+      .ball-wrap.shake .ball-glow,
+      .bg::before,
+      .nebula,
+      .spark{ animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+    <div class="nebula"></div>
+    <div class="sparkles" aria-hidden="true">
+      <i class="spark s1"></i>
+      <i class="spark s2"></i>
+      <i class="spark s3"></i>
+      <i class="spark s4"></i>
+      <i class="spark s5"></i>
+    </div>
+  </div>
+
+  <main class="app">
+    <h1 class="title">
+      <span class="l1">Личный</span>
+      <span class="l2">магический шар</span>
+      <span class="l3">Анечки Аббасовой</span>
+    </h1>
+
+    <div class="ornament" aria-hidden="true"><span></span></div>
+
+    <section class="center" aria-live="polite">
+      <div class="ball-wrap" id="ballWrap" role="button" aria-label="Узнать ответ">
+        <div class="ball-glow" aria-hidden="true"></div>
+        <div class="ball-shadow" aria-hidden="true"></div>
+        <div class="motion" aria-hidden="true"></div>
+
+        <div class="ball">
+          <div class="window">
+            <div class="window-frame"></div>
+            <div class="answer hidden" id="answer"><span></span></div>
+          </div>
+          <div class="rim"></div>
+        </div>
+      </div>
+
+      <button class="ask-btn" id="askBtn" type="button">УЗНАТЬ ОТВЕТ</button>
+      <div class="tap-hint">или нажми на шар</div>
+
+      <p class="note">
+        Если тебя не устроил ответ, не торопись искать новый. Вернись через час
+      </p>
+
+      <div class="status" id="status"></div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const ANSWERS = [
+        "ДА",
+        "НЕТ",
+        "СКОРЕЕ ДА",
+        "СКОРЕЕ НЕТ",
+        "ДА, ДОРОГАЯ",
+        "НУ КОНЕЧНО",
+        "ГАЗУЙ",
+        "МОЖНО",
+        "НУЖНО",
+        "НЕ СТОИТ",
+        "РИСКНИ",
+        "ЛУЧШЕ НЕ НАДО",
+        "ОНО ТОГО СТОИТ",
+        "ВРЯД ЛИ",
+        "ВОЗМОЖНО",
+        "НЕ СЕЙЧАС",
+        "ЧУТЬ ПОЗЖЕ",
+        "СОМНИТЕЛЬНО",
+        "ОЧЕНЬ ДА",
+        "АНЕ МОЖНО",
+        "АНЕ МОЖНО ВСЁ",
+        "ОДОБРЕНО",
+        "ОТКЛОНЕНО",
+        "СЕГОДНЯ — ДА",
+        "СЕГОДНЯ — НЕТ",
+        "ТОЛЬКО КРАСИВО",
+        "А ВОТ ЭТО ИНТЕРЕСНО",
+        "ХУЙ ЕГО ЗНАЕТ"
+      ];
+
+      const LOCK_MS = 60 * 60 * 1000;
+      const STORAGE_KEY = "anna_magic_ball_v7";
+      const ballWrap = document.getElementById("ballWrap");
+      const askBtn = document.getElementById("askBtn");
+      const answerEl = document.getElementById("answer");
+      const answerSpan = answerEl.querySelector("span");
+      const statusEl = document.getElementById("status");
+
+      let busy = false;
+      let timer = null;
+
+      function storageAvailable() {
+        try {
+          localStorage.setItem("__magic_test__", "1");
+          localStorage.removeItem("__magic_test__");
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      const hasStorage = storageAvailable();
+
+      function readState() {
+        if (!hasStorage) return null;
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function writeState(state) {
+        if (!hasStorage) return;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {}
+      }
+
+      function clearState() {
+        if (!hasStorage) return;
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch (e) {}
+      }
+
+      function formatRemaining(ms) {
+        const total = Math.max(0, Math.ceil(ms / 1000));
+        const min = Math.floor(total / 60);
+        const sec = total % 60;
+        return `${min}:${String(sec).padStart(2, "0")}`;
+      }
+
+      function pickAnswer() {
+        const previous = readState()?.answer || null;
+        const pool = ANSWERS.filter(a => a !== previous);
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      function splitForDisplay(text) {
+        const clean = text.trim();
+        const words = clean.split(/\s+/);
+
+        if (words.length === 1) return clean;
+        if (clean.includes(", ")) return clean.replace(", ", ",<br>");
+        if (clean.includes(" — ")) return clean.replace(" — ", "<br>— ");
+        if (words.length === 2) return `${words[0]}<br>${words[1]}`;
+
+        let bestIndex = 1;
+        let bestDelta = Infinity;
+        for (let i = 1; i < words.length; i++) {
+          const left = words.slice(0, i).join(" ");
+          const right = words.slice(i).join(" ");
+          const delta = Math.abs(left.length - right.length);
+          if (delta < bestDelta) {
+            bestDelta = delta;
+            bestIndex = i;
+          }
+        }
+        return `${words.slice(0, bestIndex).join(" ")}<br>${words.slice(bestIndex).join(" ")}`;
+      }
+
+      function baseSizeFor(text) {
+        const len = text.length;
+        if (len <= 4) return 22;
+        if (len <= 8) return 20;
+        if (len <= 14) return 18;
+        if (len <= 20) return 16.5;
+        return 15;
+      }
+
+      function renderAnswer(text) {
+        const words = text.trim().split(/\s+/);
+        answerEl.classList.toggle("single", words.length === 1);
+        answerSpan.innerHTML = splitForDisplay(text);
+        answerSpan.style.fontSize = `${baseSizeFor(text)}px`;
+
+        requestAnimationFrame(() => {
+          let size = parseFloat(answerSpan.style.fontSize);
+          let guard = 0;
+          while (
+            guard < 40 &&
+            (answerSpan.scrollWidth > answerEl.clientWidth * 0.98 || answerSpan.scrollHeight > answerEl.clientHeight * 0.96) &&
+            size > 11
+          ) {
+            size -= 0.5;
+            answerSpan.style.fontSize = `${size}px`;
+            guard++;
+          }
+        });
+
+        answerEl.classList.remove("hidden");
+      }
+
+      function vibrate() {
+        if (!navigator.vibrate) return;
+        try { navigator.vibrate([24, 40, 24, 48]); } catch (e) {}
+      }
+
+      function setLockedUI(state) {
+        const remaining = LOCK_MS - (Date.now() - state.timestamp);
+
+        if (remaining <= 0) {
+          clearState();
+          askBtn.hidden = false;
+          askBtn.disabled = false;
+          askBtn.textContent = "УЗНАТЬ ОТВЕТ";
+          busy = false;
+          statusEl.textContent = "";
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+          return;
+        }
+
+        renderAnswer(state.answer);
+        askBtn.hidden = false;
+        askBtn.disabled = true;
+        askBtn.textContent = "ВЕРНИСЬ ЧЕРЕЗ ЧАС";
+        statusEl.textContent = `Следующий вопрос — через ${formatRemaining(remaining)}`;
+
+        if (!timer) {
+          timer = setInterval(() => {
+            const fresh = readState();
+            if (!fresh) {
+              clearInterval(timer);
+              timer = null;
+              askBtn.hidden = false;
+              askBtn.disabled = false;
+              askBtn.textContent = "УЗНАТЬ ОТВЕТ";
+              statusEl.textContent = "";
+              return;
+            }
+            const r = LOCK_MS - (Date.now() - fresh.timestamp);
+            if (r <= 0) {
+              clearState();
+              clearInterval(timer);
+              timer = null;
+              askBtn.hidden = false;
+              askBtn.disabled = false;
+              askBtn.textContent = "УЗНАТЬ ОТВЕТ";
+              statusEl.textContent = "";
+              return;
+            }
+            statusEl.textContent = `Следующий вопрос — через ${formatRemaining(r)}`;
+          }, 1000);
+        }
+      }
+
+      function ask(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (busy || askBtn.disabled) return;
+
+        busy = true;
+        askBtn.disabled = true;
+        statusEl.textContent = "Шар думает";
+        answerEl.classList.add("hidden");
+
+        ballWrap.classList.remove("shake");
+        void ballWrap.offsetWidth;
+        ballWrap.classList.add("shake");
+        vibrate();
+
+        const answer = pickAnswer();
+
+        setTimeout(() => {
+          const state = { answer, timestamp: Date.now() };
+          renderAnswer(answer);
+          writeState(state);
+          setLockedUI(state);
+          busy = false;
+        }, 950);
+      }
+
+      askBtn.addEventListener("click", ask, { passive:false });
+      ballWrap.addEventListener("click", ask, { passive:false });
+
+      const initial = readState();
+      if (initial && Date.now() - initial.timestamp < LOCK_MS) {
+        setLockedUI(initial);
+      } else {
+        askBtn.hidden = false;
+        askBtn.disabled = false;
+        askBtn.textContent = "УЗНАТЬ ОТВЕТ";
+      }
+    })();
+  </script>
+</body>
+</html>
