@@ -133,42 +133,93 @@
       overflow:hidden;
     }
 
+    .title-wrap{
+      position:relative;
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      margin-top:4px;
+      flex:0 0 auto;
+    }
+
     .title{
       margin:2px 0 0;
       text-align:center;
-      font-family: Georgia, "Times New Roman", serif;
-      line-height:.94;
-      letter-spacing:-.04em;
+      font-family:"Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
+      font-weight:400;
+      line-height:.98;
+      letter-spacing:-.03em;
       color:#f7f4ef;
-      text-shadow:0 0 24px rgba(255,255,255,.03);
+      text-shadow:0 0 18px rgba(255,255,255,.025);
       flex:0 0 auto;
+      position:relative;
+      z-index:2;
     }
-    .title .l1{ display:block; font-size:clamp(31px, 8vw, 46px); margin-bottom:4px; }
+    .title .l1{
+      display:block;
+      font-size:clamp(26px, 6.8vw, 38px);
+      margin-bottom:6px;
+      letter-spacing:.02em;
+      opacity:.95;
+    }
     .title .l2{
       display:block;
-      font-size:clamp(49px, 12vw, 72px);
+      font-size:clamp(42px, 10.4vw, 62px);
       position:relative;
+      font-weight:400;
     }
     .title .l2::after{
-      content:"✦";
-      position:absolute;
-      right:-9px;
-      top:-4px;
-      font-size:.24em;
-      color:#efe5ff;
-      text-shadow:0 0 12px rgba(232,214,255,.8);
+      content:"";
+      display:none;
     }
     .title .l3{
       display:block;
-      margin-top:10px;
-      font-size:clamp(27px, 7vw, 38px);
-      letter-spacing:-.03em;
+      margin-top:12px;
+      font-size:clamp(24px, 6.4vw, 34px);
+      letter-spacing:-.02em;
+      font-weight:400;
     }
+
+    .subtitle{
+      width:min(100%, 360px);
+      margin:16px auto 0;
+      text-align:center;
+      color:rgba(237,233,245,.78);
+      font-size:14px;
+      line-height:1.5;
+      letter-spacing:.01em;
+      text-wrap:balance;
+      position:relative;
+      z-index:2;
+    }
+
+    .subtitle span{
+      color:rgba(248,244,255,.96);
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+
+    .title-spark{
+      position:absolute;
+      color:rgba(242,233,255,.9);
+      text-shadow:0 0 12px rgba(214,198,255,.55);
+      font-size:14px;
+      z-index:1;
+      animation:blink 4s ease-in-out infinite;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .title-spark.ts1{ left:17%; top:14px; font-size:12px; animation-delay:.3s; }
+    .title-spark.ts2{ right:16%; top:44px; font-size:16px; animation-delay:1.2s; }
+    .title-spark.ts3{ left:24%; bottom:10px; font-size:11px; animation-delay:2.1s; }
 
     .ornament{
       width:122px;
       height:18px;
-      margin:24px auto 12px;
+      margin:18px auto 14px;
       position:relative;
       opacity:.88;
       flex:0 0 auto;
@@ -391,31 +442,31 @@
     .answer{
       position:relative;
       z-index:4;
-      width:66%;
-      min-height:44%;
+      width:54%;
+      min-height:38%;
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:0 2px 8px;
+      padding:0 0 12px;
       color:rgba(255,255,255,.97);
       font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
       font-weight:300;
-      font-size:18px;
-      line-height:1.05;
-      letter-spacing:.07em;
+      font-size:16px;
+      line-height:1.04;
+      letter-spacing:.055em;
       text-transform:uppercase;
       text-shadow:
-        0 0 8px rgba(255,255,255,.12),
-        0 0 14px rgba(87,113,255,.08);
+        0 0 8px rgba(255,255,255,.10),
+        0 0 14px rgba(87,113,255,.07);
       opacity:1;
-      transform:translateY(-10px);
+      transform:translateY(-18px);
       transition:opacity .2s ease, transform .2s ease;
     }
 
     .answer.hidden{
       opacity:0;
-      transform:translateY(-10px) scale(.94);
+      transform:translateY(-18px) scale(.94);
     }
 
     .answer span{
@@ -565,17 +616,26 @@
 
     @media (max-width:390px){
       .app{padding-left:14px;padding-right:14px}
-      .title .l2{font-size:46px}
-      .title .l3{font-size:25px}
+      .title .l1{font-size:24px}
+      .title .l2{font-size:40px}
+      .title .l3{font-size:22px}
+      .subtitle{font-size:13px; width:min(100%, 330px); margin-top:14px}
+      .title-spark.ts1{left:10%}
+      .title-spark.ts2{right:9%}
+      .title-spark.ts3{left:17%}
       .ball-wrap{width:min(84vw, 330px)}
       .ask-btn{font-size:17px; letter-spacing:.2em}
       .answer{font-size:16px}
     }
 
     @media (max-height:760px){
-      .app{padding-top:18px; padding-bottom:14px}
-      .ornament{margin:16px auto 8px}
-      .ball-wrap{width:min(68vw, 292px); margin-bottom:16px}
+      .app{padding-top:16px; padding-bottom:14px}
+      .title .l1{font-size:24px}
+      .title .l2{font-size:38px}
+      .title .l3{font-size:21px; margin-top:8px}
+      .subtitle{font-size:12.5px; margin-top:10px; width:min(100%, 320px)}
+      .ornament{margin:12px auto 8px}
+      .ball-wrap{width:min(66vw, 286px); margin-bottom:16px}
       .ask-btn{min-height:62px}
       .note{margin-top:16px; font-size:13px}
       .answer{font-size:15px}
@@ -604,11 +664,22 @@
   </div>
 
   <main class="app">
-    <h1 class="title">
-      <span class="l1">Личный</span>
-      <span class="l2">магический шар</span>
-      <span class="l3">Анечки Аббасовой</span>
-    </h1>
+    <div class="title-wrap">
+      <div class="title-spark ts1" aria-hidden="true">✦</div>
+      <div class="title-spark ts2" aria-hidden="true">✦</div>
+      <div class="title-spark ts3" aria-hidden="true">✦</div>
+
+      <h1 class="title">
+        <span class="l1">Личный</span>
+        <span class="l2">магический шар</span>
+        <span class="l3">Анечки Аббасовой</span>
+      </h1>
+
+      <p class="subtitle">
+        Сосредоточься, четко сформулируй вопрос и нажми на кнопку
+        <span>УЗНАТЬ ОТВЕТ</span>.
+      </p>
+    </div>
 
     <div class="ornament" aria-hidden="true"><span></span></div>
 
@@ -672,7 +743,7 @@
       ];
 
       const LOCK_MS = 60 * 60 * 1000;
-      const STORAGE_KEY = "anna_magic_ball_v7";
+      const STORAGE_KEY = "anna_magic_ball_v9";
       const ballWrap = document.getElementById("ballWrap");
       const askBtn = document.getElementById("askBtn");
       const answerEl = document.getElementById("answer");
@@ -738,6 +809,7 @@
         if (words.length === 1) return clean;
         if (clean.includes(", ")) return clean.replace(", ", ",<br>");
         if (clean.includes(" — ")) return clean.replace(" — ", "<br>— ");
+
         if (words.length === 2) return `${words[0]}<br>${words[1]}`;
 
         let bestIndex = 1;
@@ -756,26 +828,32 @@
 
       function baseSizeFor(text) {
         const len = text.length;
-        if (len <= 4) return 22;
-        if (len <= 8) return 20;
-        if (len <= 14) return 18;
-        if (len <= 20) return 16.5;
-        return 15;
+        if (len <= 4) return 19;
+        if (len <= 8) return 17;
+        if (len <= 12) return 15.5;
+        if (len <= 18) return 14.5;
+        return 13.5;
       }
 
       function renderAnswer(text) {
         const words = text.trim().split(/\s+/);
-        answerEl.classList.toggle("single", words.length === 1);
+        const isSingle = words.length === 1;
+
+        answerEl.classList.toggle("single", isSingle);
         answerSpan.innerHTML = splitForDisplay(text);
-        answerSpan.style.fontSize = `${baseSizeFor(text)}px`;
+
+        let size = baseSizeFor(text);
+        answerSpan.style.fontSize = `${size}px`;
 
         requestAnimationFrame(() => {
-          let size = parseFloat(answerSpan.style.fontSize);
+          const safeWidth = answerEl.clientWidth * (isSingle ? 0.78 : 0.88);
+          const safeHeight = answerEl.clientHeight * 0.92;
+
           let guard = 0;
           while (
-            guard < 40 &&
-            (answerSpan.scrollWidth > answerEl.clientWidth * 0.98 || answerSpan.scrollHeight > answerEl.clientHeight * 0.96) &&
-            size > 11
+            guard < 50 &&
+            (answerSpan.scrollWidth > safeWidth || answerSpan.scrollHeight > safeHeight) &&
+            size > 10
           ) {
             size -= 0.5;
             answerSpan.style.fontSize = `${size}px`;
