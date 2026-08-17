@@ -711,7 +711,7 @@
 
   <script>
     (() => {
-      const ANSWERS = [
+            const ANSWERS = [
         "ДА",
         "НЕТ",
         "СКОРЕЕ ДА",
@@ -733,17 +733,16 @@
         "ОЧЕНЬ ДА",
         "АНЕ МОЖНО",
         "АНЕ МОЖНО ВСЁ",
-        "ОДОБРЕНО",
-        "ОТКЛОНЕНО",
         "СЕГОДНЯ — ДА",
         "СЕГОДНЯ — НЕТ",
-        "ТОЛЬКО КРАСИВО",
         "А ВОТ ЭТО ИНТЕРЕСНО",
-        "ХУЙ ЕГО ЗНАЕТ"
+        "ХУЙ ЕГО ЗНАЕТ",
+        "СОГЛАСОВАНО",
+        "НЕ СОГЛАСОВАНО"
       ];
 
       const LOCK_MS = 60 * 60 * 1000;
-      const STORAGE_KEY = "anna_magic_ball_v9";
+      const STORAGE_KEY = "anna_magic_ball_v10";
       const ballWrap = document.getElementById("ballWrap");
       const askBtn = document.getElementById("askBtn");
       const answerEl = document.getElementById("answer");
